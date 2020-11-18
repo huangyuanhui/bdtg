@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdyakj.bdtg.dao.DataDao">
+    <!--  注册添加  -->
+    <insert id="insertData" parameterType="com.gdyakj.bdtg.bean.InfoMessage">
+        insert into intent_order
+        (company_name, area, system, machine_band, customer_name, cell_phone, create_time, customer_type)
+        values
+        (#{companyName}, #{area}, #{system}, #{machineBand}, #{customerName}, #{cellPhone}, #{createTime}, #{customerType})
+    </insert>
+
+    <!-- 查询所有用户   -->
+    <select id="findAll" resultType="com.gdyakj.bdtg.bean.InfoMessage">
+        select customer_type customerType, area, system, company_name companyName, cell_phone cellPhone, create_time createTime, machine_band machineBand, customer_name customerName from intent_order order by create_time desc
+    </select>
+</mapper>

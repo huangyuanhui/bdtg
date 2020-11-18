@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>广东粤安科技股份有限公司</title>
+    <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="./image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.7.css">
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/axios.js"></script>
+    <style type="text/css">
+        #newCenter {
+            background: url('./image/1_9.jpg');
+            background-size: cover;
+            padding-bottom: 8.6%;
+            position: relative;
+        }
+
+        #newCenter a {
+            padding-right: 80px;
+            padding-left: 80px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            transform: translate(-50%, -50%);
+        }
+
+        .row-vertical-center {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <div class="container-fluid" style="padding-left: 0;">
+        <div class="row row-vertical-center">
+            <div class="col-xs-5 col-md-5">
+                <img src="./image/logo.jpg" style="width: 100%; margin-top: 2px;">
+            </div>
+            <div class="col-xs-7 col-md-7" style="padding: 0px 0px; height: 100%">
+                <ul class="nav navbar-nav" style="height: 100%; margin: 0px 0px 0px; font-size: 18px;">
+                    <li id="111"><a id="hoverCss" href="http://www.gdyakj.cn/" style="color: #3C3C3C;">首页</a></li>
+                    <li style="margin-left: 8px"><a href="http://www.gdyakj.cn/#con_nxl" style="color: #3C3C3C">智显云</a>
+                    </li>
+                    <li style="margin-left: 8px"><a
+                            href="http://www.gdyakj.cn/index.php/Home/index/detail/cate/2/id/37.html"
+                            style="color: #3C3C3C">粤安新闻</a></li>
+                    <li style="margin-left: 8px"><a href="http://www.gdyakj.cn/#engineBox"
+                                                    style="color: #3C3C3C">粤安工程</a></li>
+                    <li style="margin-left: 8px"><a href="http://www.gdyakj.cn/#aboutBox"
+                                                    style="color: #3C3C3C">关于粤安</a></li>
+                    <li style="margin-left: 8px"><a
+                            href="http://www.gdyakj.cn/index.php/Home/index/detail/cate/6/id/39.html"
+                            style="color: #3C3C3C">招聘英才</a></li>
+                    <li style="margin-left: 8px"><a
+                            href="http://www.gdyakj.cn/index.php/Home/index/index.html?type=5#usBox"
+                            style="color: #3C3C3C">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <img src="./image/1_2.jpg" style="width: 100%;">
+    <img src="./image/1_3.jpg" style="width: 100%;">
+    <div id="newCenter">
+        <a type="button" class="btn btn-danger btn-lg" @click="chat()">合作咨询</a>
+    </div>
+    <img src="./image/1_4.jpg" style="width: 100%;">
+    <img src="./image/1_5.jpg" style="width: 100%;">
+    <img src="./image/weibao.jpg" style="width: 100%">
+
+    <div style="background-image: url('./image/1_7.jpg'); background-size: cover">
+        <h2 align="center" style="padding-top: 40px;">申请试用</h2>
+        <form role="form" class="form-horizontal AddmodelForm"
+              style="padding-left: 10%; padding-right: 25%; padding-bottom: 16px">
+            <div class="form-group col-xs-12" style="margin-top: 20px;">
+                <label class="col-xs-4 control-label"><span style="color: red">* </span>公司名称</label>
+                <div class="col-xs-8">
+                    <input name="companyName" v-model="entity.companyName" class="input-text form-control input-lg">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12" style="margin-top: 16px">
+                <label class="col-xs-4 control-label"><span style="color: red">* </span>总建筑面积</label>
+                <div class="col-xs-8">
+                    <input name="area" v-model="entity.area" class="input-text form-control input-lg">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12" style="margin-top: 16px">
+                <label class="col-xs-4 control-label"><span style="color: red">* </span>消防主机品牌</label>
+                <div class="col-xs-8">
+                    <input name="machineBand" v-model="entity.machineBand" class="input-text form-control input-lg">
+                </div>
+            </div>
+            <div class="form-group col-xs-12" style="margin-top: 16px">
+                <label class="col-xs-4 control-label"><span style="color: red">* </span>消防系统</label>
+                <div class="col-xs-8">
+                    <!-- <input name="system" v-model="entity.system" class="input-text input-lg">-->
+                    <select class="form-control input-lg" name="system" v-model="entity.system">
+                        <option v-for="option in options" :value="option.value">
+                            {{ option.text }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-xs-12" style="margin-top: 16px">
+                <label class="col-xs-4 control-label"><span style="color: red">* </span>您的姓名</label>
+                <div class="col-xs-8">
+                    <input name="customerName" v-model="entity.customerName" class="input-text form-control input-lg">
+                </div>
+            </div>
+            <div class="form-group col-xs-12" style="margin-top: 16px">
+                <label class="col-xs-4 control-label"><span style="color: red">* </span>联系方式</label>
+                <div class="col-xs-8">
+                    <input name="cellPhone" v-model="entity.cellPhone" class="input-text form-control input-lg">
+                </div>
+            </div>
+            <div class="form-group col-xs-12" style="margin-top: 28px; margin-bottom: 40px">
+                <label class="col-xs-4 control-label"></label>
+                <div class="col-xs-8" style="text-align: center">
+                    <a type="button" @click="submitInfo" class="btn btn-danger btn-lg"
+                       style="padding-right: 64px; padding-left: 64px">提
+                        交</a>
+                </div>
+            </div>
+        </form>
+        <div style="clear:both;"></div>
+    </div>
+
+    <img src="./image/1_8.jpg" style="width: 100%;">
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            entity: {
+                customerType: 1
+            },
+            options: [
+                {text: '室内消火栓系统', value: '室内消火栓系统'},
+                {text: '室外消火栓系统', value: '室外消火栓系统'},
+                {text: '自动喷水灭火系统', value: '自动喷水灭火系统'},
+                {text: '气体灭火系统', value: '气体灭火系统'},
+                {text: '防火卷帘系统', value: '防火卷帘系统'},
+                {text: '防烟排烟系统', value: '防烟排烟系统'},
+                {text: '火灾自动报警系统', value: '火灾自动报警系统'},
+                {text: '消防电梯', value: '消防电梯'},
+                {text: '火灾电气监控系统', value: '火灾电气监控系统'},
+                {text: '消防电源监控系统', value: '消防电源监控系统'},
+                {text: '疏散指示标志', value: '疏散指示标志'},
+                {text: '消防应急照明', value: '消防应急照明'},
+                {text: '消防器材', value: '消防器材'}
+            ]
+        },
+        methods: {
+            chat: function () {
+                var _hmt = _hmt || [];
+                (function () {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?efb7639031e1898176d97ac704cb61f6";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            },
+            submitInfo: function () {
+                // 发送异步请求
+                axios.post("/save", this.entity).then(function (response) {
+                    // 判断响应数据 response.data: true|false
+                    if (response.data) {
+                        vm.entity = {
+                            customerType: 1
+                        };
+                    } else {
+                        alert("操作失败！");
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

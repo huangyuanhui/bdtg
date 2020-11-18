@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>广东粤安科技股份有限公司</title>
+    <link rel="stylesheet" href="./css/bootstrap-3.3.7.css">
+    <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="./image/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/axios.js"></script>
+    <script type="text/javascript" src="./js/pagination.js"></script>
+</head>
+<body>
+
+<div id="app" style="padding: 2%;">
+    <!--数据列表-->
+    <table id="dataList"
+           class="table table-bordered table-striped table-hover dataTable">
+        <thead>
+        <tr>
+            <th class="sorting">客户需求</th>
+            <th class="sorting">公司名称</th>
+            <th class="sorting">总建筑面积</th>
+            <th class="sorting">消防主句品牌</th>
+            <th class="sorting">消防系统</th>
+            <th class="sorting">客户姓名</th>
+            <th class="sorting">联系方式</th>
+            <th class="sorting">咨询时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="entity in orders">
+            <td>{{entity.customerType == 1 ? '消防维保' : '智显云'}}</td>
+            <td>{{entity.companyName}}</td>
+            <td>{{entity.area}}</td>
+            <td>{{entity.machineBand}}</td>
+            <td>{{entity.system}}</td>
+            <td>{{entity.customerName}}</td>
+            <td>{{entity.cellPhone}}</td>
+            <td>{{entity.createTime}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <pagination :pages="pages" :current="page" @navpage="search"/>
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            page: 1,
+            orders: [],
+            pages: 0
+        },
+        methods: {
+            search: function (page) {
+                // 发送异步请求
+                axios.get("/pageInfo?page=" + page).then(function (response) {
+                    vm.orders = response.data.rows;
+                    // 设置总页数
+                    vm.pages = response.data.pages;
+                    // 设置当前页码
+                    vm.page = page;
+                });
+            }
+        },
+        created: function () {
+            this.search(this.page);
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 在移动端不缩放 -->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>广东粤安科技股份有限公司</title>
+    <link rel="stylesheet" href="./css/bootstrap-3.3.7.css">
+    <link rel="stylesheet" href="./css/video-js.min.css">
+    <link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="./image/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/axios.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <SCRIPT type="text/javascript" src="./js/video.min.js"></SCRIPT>
+
+    <style type="text/css">
+        #videoCenter {
+            background: url('./image/4_4.jpg');
+            background-size: cover;
+            padding-bottom: 84.133%;
+            position: relative;
+        }
+
+        #videoCenter video {
+            position: absolute;
+            top: 25%;
+            left: 8%;
+            width: 84%;
+            height: 60%;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?9cfd74a8dadf3a931fe97ad1135096a3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+<div id="app">
+
+    <div class="container-fluid" style="padding-left: 0; height: 60px;">
+        <div class="row" style="height: 60px;">
+            <div class="col-xs-8 col-md-8" style="height: 60px;">
+                <img src="./image/phoneLogo.jpg" style="height: 60px">
+            </div>
+            <div class="col-xs-2 col-md-2" style="padding: 0; height: 60px;">
+                <img @click="callPhone" src="./image/phoneicon.jpg" style="height: 60px;">
+            </div>
+            <!-- 定义反白导航条 -->
+            <div class="col-xs-2 col-md-2 navbar navbar-static-top" style="padding: 0; margin: 0px 0px 0px; height: 60px;">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- 定义隐藏下拉按钮 -->
+                        <button class="navbar-toggle" style="padding-bottom: 0px; font-size: x-large;" data-toggle="collapse"
+                                data-target="#togglemenu">
+                            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <!-- 做隐藏菜单 -->
+                    <div class="collapse navbar-collapse" style="background-color: white;" id="togglemenu">
+                        <!-- 菜单项 -->
+                        <ul class="nav navbar-nav" style="margin-top: 0px;">
+                            <!-- "cative"：定义当前页 -->
+                            <li><a href="http://www.gdyakj.cn/" style="color: black">首页</a></li>
+                            <li><a href="http://www.gdyakj.cn/#con_nxl" style="color: black">智显云</a></li>
+                            <li><a href="http://www.gdyakj.cn/index.php/Home/index/detail/cate/2/id/37.html" style="color: black">粤安新闻</a></li>
+                            <li><a href="http://www.gdyakj.cn/#engineBox" style="color: black">粤安工程</a></li>
+                            <li><a href="http://www.gdyakj.cn/#aboutBox" style="color: black">关于粤安</a></li>
+                            <li><a href="http://www.gdyakj.cn/index.php/Home/index/detail/cate/6/id/39.html" style="color: black">招聘英才</a></li>
+                            <li><a href="http://www.gdyakj.cn/index.php/Home/index/index.html?type=5#usBox" style="color: black">联系我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <img src="./image/4_2.jpg" style="width: 100%;">
+
+    <div id="videoCenter">
+        <video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto"
+               poster="./image/preloadimg.jpg">
+            <source src="./video/zhixianxiaofang.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <img src="./image/4_3.jpg" style="width: 100%;">
+    <img src="./image/4_5.jpg" style="width: 100%;">
+    <img src="./image/4_6.jpg" style="width: 100%;">
+    <div style="background-color: #ececec">
+        <h3 align="center" style="padding-top: 40px;">申请试用</h3>
+        <form role="form" class="form-horizontal"
+              style="padding-left: 5%;">
+            <div class="form-group col-xs-12" style="margin-top: 20px;">
+                <label class="col-xs-12 control-label" style="font-size: 16px; text-align: left"><span
+                        style="color: red">* </span>公司名称</label>
+                <div class="col-xs-12" style="margin-top: 4px">
+                    <input name="companyName" v-model="entity.companyName" class="input-lg input-text form-control">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12" style="margin-top: 20px">
+                <label class="col-xs-12 control-label" style="font-size: 16px; text-align: left"><span
+                        style="color: red">* </span>您的姓名</label>
+                <div class="col-xs-12" style="margin-top: 4px">
+                    <input name="customerName" v-model="entity.customerName" class="input-lg input-text form-control">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12" style="margin-top: 20px">
+                <label class="col-xs-12 control-label" style="font-size: 16px; text-align: left"><span
+                        style="color: red">* </span>联系方式</label>
+                <div class="col-xs-12" style="margin-top: 4px">
+                    <input name="cellPhone" v-model="entity.cellPhone" class="input-lg input-text form-control">
+                </div>
+            </div>
+            <div class="form-group col-xs-12" style="margin-top: 20px">
+                <label class="col-xs-12 control-label" style="font-size: 16px; text-align: left"><span
+                        style="color: red">* </span>消防主机品牌</label>
+                <div class="col-xs-12" style="margin-top: 4px">
+                    <input name="machineBand" v-model="entity.machineBand" class="input-lg input-text form-control">
+                </div>
+            </div>
+            <div class="form-group col-xs-12" style="margin-top: 40px; padding-bottom: 40px;">
+                <div class="col-xs-12" style="text-align: center">
+                    <a @click="saveData" type="button" class="btn btn-danger btn-lg"
+                       style="padding-right: 64px; padding-left:64px">提
+                        交</a>
+                </div>
+            </div>
+        </form>
+        <div style="clear:both;"></div>
+    </div>
+    <img src="./image/4_7.jpg" style="width: 100%;">
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            entity: {
+                customerType: 0
+            }
+        },
+        methods: {
+            saveData: function () {
+                // 发送异步请求
+                axios.post("/save", this.entity).then(function (response) {
+                    // 判断响应数据 response.data: true|false
+                    if (response.data) {
+                        vm.entity = {
+                            customerType: 0
+                        };
+                    } else {
+                        alert("操作失败！");
+                    }
+                });
+            },
+            callPhone: function () {
+                window.location.href = "tel:18027123020";
+            }
+        }
+    });
+</script>
+</body>
+</html>
